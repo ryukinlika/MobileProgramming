@@ -1,0 +1,34 @@
+Pengujian app dengan skenario 
+1. Angka 1 dan Angka 2 kosong, lalu klik salah satu button
+	-Ketika mendapatkan text dari EditText angka1, akan mendapat empty editable object. Kemudian di konversi ke string menjadi empty string.
+	-Kemudian melakukan method parseDouble untuk mendapat nilai double dari string tersebut, tetapi input berupa empty string, maka akan error.
+	-Exception yang dikeluarkan adalah NumberFormatException, karena input berupa empty string
+	*Solusi berupa melakukan cek terlebih dahulu, apakah angka1 dan angka2 berupa empty string atau bukan. Jika berupa empty string, langsung assign nilai operand dengan konstanta (misal 0), tidak melakukan method parseDouble. 
+
+        double operand1 = Double.parseDouble(angka1.getText().toString());
+	double operand2 = Double.parseDouble(angka2.getText().toString());
+			>>>menjadi<<<
+	double operand1 = (TextUtils.isEmpty(angka1.getText()) ? 0 : Double.parseDouble(angka1.getText().toString()));
+        double operand2 = (TextUtils.isEmpty(angka2.getText()) ? 0 : Double.parseDouble(angka2.getText().toString()));
+
+
+2. Angka 2 kosong, lalu klik button bagi
+	-Ketika parsingDouble nilai dari angka2, akan error seperti skenario nomor 1, yaitu NumberFormatException: isEmpty String.
+	*Solusi sama dapat diterapkan, tetapi nilai operand2 akan menjadi 0. Meskipun pembagian dengan operandi 0, tidak akan terkena error ArithmeticException karena datatype float/double. Hasil akan berupa "Infinity" (Not a Number). 
+	*Jika input berupa Integer, solusi dapat berupa melakukan if terlebih dahulu, mengecek apakah operandi 0 atau tidak. Jika 0, tidak melakukan operasi pembagian.
+
+3. Angka 2 bernilai 0, lalu klik button bagi
+	-Ketika melakukan pembagian, tidak terjadi error karena datatype berupa double. ArithmeticException hanya terjadi pada pembagian datatype integer. 
+	*Tidak perlu menerapkan solusi spesifik.
+
+
+====================================================================
+
+Debugging program
+- Step-over: debugger menjalankan satu line kemudian berhenti. Berguna untuk mengecek dimana terjadinya error/bug.
+- Step-into: jika debugger menjalankan method dan masuk kedalam implementasi dari method tersebut, jika tidak, hanya menjalankan satu line; kemudian berhenti. Berguna untuk mengecek apakah error/bug terjadi dalam suatu method atau tidak
+- Step-out: debugger menjalankan sampai akhir dari block atau method, kemudian kembali ke line dimana method dipanggil. Berguna untuk mempercepat proses debuggging.
+- Resume: debugger menjalankan kembali program
+
+
+
